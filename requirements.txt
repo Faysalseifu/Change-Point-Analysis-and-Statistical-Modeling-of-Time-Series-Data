@@ -1,0 +1,8 @@
+pandas
+numpy
+matplotlib
+seaborn
+pymc
+arviz
+statsmodels
+openpyxl
