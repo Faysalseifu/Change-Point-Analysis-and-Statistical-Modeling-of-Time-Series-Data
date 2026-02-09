@@ -1,0 +1,57 @@
+Interim Report (Task 1 and Task 2)
+Date: 2026-02-08
+
+Overview
+This interim report covers Task 1 (data sourcing, event timeline preparation, and initial exploration) and Task 2 (change point modeling setup and interpretation plan) for Brent crude oil prices from 2012-2022. The goal is to understand regime shifts in prices and relate them to major geopolitical and market events.
+
+Planned Analysis Steps
+1. Data acquisition and validation
+   - Load Brent price series from raw CSV source.
+   - Standardize date formats, remove invalid rows, and verify continuity.
+   - Confirm price column naming and units (USD/bbl).
+
+2. Event timeline construction
+   - Compile major geopolitical and market events affecting oil prices.
+   - Create a structured dataset with event dates and descriptions.
+   - Align events with the price series time range (2012-2022).
+
+3. Exploratory data analysis (EDA)
+   - Plot raw price series to identify macro trends and abrupt shifts.
+   - Compute log prices and log returns.
+   - Inspect volatility clustering with rolling statistics.
+   - Conduct stationarity checks (ADF; optional KPSS).
+
+4. Change point modeling (Bayesian)
+   - Use a single change point model on log returns with PyMC.
+   - Infer posterior for change point index (tau), means before/after, and sigma.
+   - Map tau to calendar dates and compare with event timeline.
+
+5. Diagnostics and interpretation
+   - Posterior trace plots and summary diagnostics.
+   - Posterior distribution of change point dates.
+   - Annotated price charts with detected change point and known events.
+
+6. Extensions (planned)
+   - Evaluate multiple change point models (e.g., piecewise regime models).
+   - Sensitivity checks on priors and likelihood assumptions.
+   - Compare results using different return windows or sampling frequencies.
+
+Structured Event Dataset (Dates and Descriptions)
+Format: YYYY-MM-DD | Event
+2014-11-27 | OPEC decision to maintain output (no-cut), triggering 2014-2016 price collapse
+2016-11-30 | OPEC and non-OPEC production cut agreement to stabilize prices
+2020-03-06 | Saudi-Russia price war begins after OPEC+ talks fail
+2020-04-20 | WTI futures turn negative amid COVID demand shock (global oil market stress)
+2021-07-18 | OPEC+ agreement to gradually increase output
+2022-02-24 | روسيا-Ukraine invasion; sanctions and supply fears push prices higher
+2022-03-08 | US announces ban on Russian oil imports
+
+Initial EDA Findings
+- Structural breaks are likely around late 2014-2016, early 2020, and early 2022, consistent with major supply and geopolitical shocks.
+- Raw price series is non-stationary; log returns appear closer to stationary.
+- Volatility clustering is visible in log returns, indicating regime-dependent variance.
+- Outliers correspond to real market shocks and should be modeled rather than removed.
+
+Notes
+- The event list is a baseline and will be refined as more sources are integrated.
+- The Bayesian model will be validated using posterior diagnostics and sensitivity tests.
