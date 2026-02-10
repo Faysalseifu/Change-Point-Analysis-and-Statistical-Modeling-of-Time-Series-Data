@@ -1,0 +1,16 @@
+Date,Event_Description,Category,Likely_Brent_Impact
+2012-01-01,EU imposes oil embargo on Iran (nuclear program sanctions tighten),Sanctions,Upward pressure from supply fears
+2014-06-01,ISIS advances in Iraq (Mosul capture, oil field disruptions),Geopolitical,Temporary spike then oversupply dominates
+2014-11-27,OPEC decides against production cuts (flood market vs US shale),OPEC Policy,Major downward break (~$100 to ~$50 range)
+2015-08-01,China stock market crash and devaluation (demand fears),Economic Shock,Contributes to ongoing decline
+2016-01-16,JCPOA implementation lifting major Iran sanctions,Sanctions,Increased supply downward pressure
+2016-11-30,OPEC agrees production cut (first in years with non-OPEC),OPEC Policy,Rebound from lows (~$30 to $50+)
+2018-05-08,US withdraws from Iran deal and reimposes maximum pressure sanctions,Sanctions,Upward pressure (supply risk)
+2018-12-01,OPEC+ announces further cuts,OPEC Policy,Supports price stabilization
+2019-09-14,Drone attacks on Saudi Aramco facilities (Abqaiq/Khurais),Geopolitical,Sharp short-term spike (~20%)
+2020-03-11,WHO declares COVID-19 pandemic; demand collapse begins,Health crisis,Sharp demand shock and price collapse
+2020-04-20,WTI futures briefly turn negative amid storage constraints,Market shock,Severe downward pressure across crude markets
+2021-04-12,OPEC+ agrees to gradually raise output through summer,OPEC Policy,Moderates price increases
+2022-02-24,Russia invades Ukraine; sanctions disrupt energy flows,Geopolitical,Strong upward pressure and volatility
+2022-03-31,US announces largest-ever strategic petroleum reserve release,Policy,Temporary easing of supply tightness
+2022-10-05,OPEC+ announces sizable production cuts,OPEC Policy,Supports higher prices into Q4
