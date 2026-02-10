@@ -53,7 +53,32 @@ def _load_events() -> pd.DataFrame:
 	processed_path = DATA_DIR / "events" / "events_processed.csv"
 	raw_path = DATA_DIR / "events" / "brent_key_events_2012_2022.csv"
 	source_path = processed_path if _is_non_empty(processed_path) else raw_path
-	df = pd.read_csv(source_path)
+	try:
+		df = pd.read_csv(source_path, engine="python")
+	except Exception:
+		rows = []
+		with source_path.open("r", encoding="utf-8") as handle:
+			lines = handle.read().splitlines()
+		if lines:
+			for line in lines[1:]:
+				if not line.strip():
+					continue
+				parts = [part.strip() for part in line.split(",")]
+				if len(parts) < 4:
+					continue
+				date = parts[0]
+				category = parts[-2]
+				impact = parts[-1]
+				description = ",".join(parts[1:-2]).strip()
+				rows.append(
+					{
+						"Date": date,
+						"Event_Description": description,
+						"Category": category,
+						"Likely_Brent_Impact": impact,
+					}
+				)
+		df = pd.DataFrame(rows)
 	if "Date" in df.columns:
 		df["Date"] = df["Date"].apply(_normalize_event_date)
 	return df

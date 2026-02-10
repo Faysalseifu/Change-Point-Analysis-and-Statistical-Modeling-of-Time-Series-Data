@@ -115,6 +115,12 @@ body {
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.filters .button-secondary {
+	background: #ffffff;
+	border: 1px solid var(--border);
+	color: var(--ink);
+}
+
 .filters button:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 12px 25px rgba(249, 115, 22, 0.25);
@@ -170,6 +176,38 @@ body {
 }
 
 .event-item strong {
+	font-weight: 600;
+}
+
+.alert-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 12px;
+}
+
+.error-card {
+	border-color: rgba(239, 68, 68, 0.35);
+	background: rgba(254, 226, 226, 0.7);
+}
+
+.error-card button {
+	margin-top: 12px;
+}
+
+.status-banner {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	background: rgba(15, 23, 42, 0.08);
+	border: 1px solid rgba(15, 23, 42, 0.1);
+	border-radius: 12px;
+	padding: 12px 14px;
+	margin-bottom: 16px;
+}
+
+.status-banner strong {
 	font-weight: 600;
 }
 
