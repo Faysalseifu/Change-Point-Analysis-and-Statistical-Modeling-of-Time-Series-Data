@@ -10,6 +10,11 @@ from services.analysis_service import (
 api = Blueprint("api", __name__, url_prefix="/api")
 
 
+@api.route("/health", methods=["GET"])
+def health():
+	return jsonify({"status": "ok"})
+
+
 @api.route("/prices", methods=["GET"])
 def prices():
 	start = request.args.get("start")

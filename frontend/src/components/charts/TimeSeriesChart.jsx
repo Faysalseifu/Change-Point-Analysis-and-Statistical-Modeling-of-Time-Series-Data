@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	Brush,
 	CartesianGrid,
 	Legend,
 	Line,
@@ -68,6 +69,7 @@ const TimeSeriesChart = ({ prices, events, changePoint }) => {
 							dot={false}
 							name="Brent price"
 						/>
+						<Brush dataKey="date" height={26} stroke="#f97316" />
 					</LineChart>
 				</ResponsiveContainer>
 			</div>

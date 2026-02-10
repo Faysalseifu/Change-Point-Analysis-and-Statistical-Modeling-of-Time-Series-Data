@@ -29,3 +29,8 @@ export const fetchStats = async () => {
 	const response = await client.get("/stats");
 	return response.data;
 };
+
+export const fetchHealth = async () => {
+	const response = await client.get("/health");
+	return response.data;
+};
