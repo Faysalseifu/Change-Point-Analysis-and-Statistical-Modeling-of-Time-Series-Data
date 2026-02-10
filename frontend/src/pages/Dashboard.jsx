@@ -4,7 +4,6 @@ import ChangePointChart from "../components/charts/ChangePointChart";
 import TimeSeriesChart from "../components/charts/TimeSeriesChart";
 import EventTimeline from "../components/analysis/EventTimeline";
 import ImpactAnalysis from "../components/analysis/ImpactAnalysis";
-import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Sidebar from "../components/common/Sidebar";
@@ -207,19 +206,16 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div className="app-shell">
-			<div className="page">
-				<Header />
-				<div className="card">
-					{apiStatus === "offline" && (
-						<div className="status-banner">
-							<strong>Backend offline</strong>
-							<span>
-								Start `python backend/app.py` and keep it running.
-							</span>
-						</div>
-					)}
-					<div className="filters">
+		<>
+			<Header />
+			<div className="card">
+				{apiStatus === "offline" && (
+					<div className="status-banner">
+						<strong>Backend offline</strong>
+						<span>Start `python backend/app.py` and keep it running.</span>
+					</div>
+				)}
+				<div className="filters">
 						<label>
 							Start date
 							<input
@@ -251,57 +247,60 @@ const Dashboard = () => {
 								setStartDate(DEFAULT_START);
 								setEndDate(DEFAULT_END);
 								setEventFilter("");
-									setDownloadReady(false);
+								setDownloadReady(false);
 							}}
 						>
 							Reset filters
 						</button>
-							<button type="button" className="button-secondary" onClick={handleDownload}>
-								Download CSV
-							</button>
-							{downloadReady && (
-								<span className="tag">Download ready</span>
-							)}
+						<button
+							type="button"
+							className="button-secondary"
+							onClick={handleDownload}
+						>
+							Download CSV
+						</button>
+						{downloadReady && <span className="tag">Download ready</span>}
 					</div>
 				</div>
 
-				{loading ? (
-					<LoadingSpinner />
-				) : error ? (
-					<div className="card error-card">
-						<h3>Data fetch failed</h3>
-						<p>{error}</p>
-						<button type="button" onClick={() => setRefreshTick((value) => value + 1)}>
-							Retry
-						</button>
+			{loading ? (
+				<LoadingSpinner />
+			) : error ? (
+				<div className="card error-card">
+					<h3>Data fetch failed</h3>
+					<p>{error}</p>
+					<button
+						type="button"
+						onClick={() => setRefreshTick((value) => value + 1)}
+					>
+						Retry
+					</button>
+				</div>
+			) : prices.length === 0 ? (
+				<div className="card">
+					<h3>No price data available</h3>
+					<p>
+						The backend returned an empty dataset. Check that
+						 data/raw/brent_prices.csv exists and try a broader date range.
+					</p>
+				</div>
+			) : (
+				<div className="grid" style={{ marginTop: "24px" }}>
+					<Overview metrics={metrics} outlook={outlook} alerts={alerts} />
+					<TimeSeriesChart
+						prices={prices}
+						events={filteredEvents}
+						changePoint={changePoint}
+					/>
+					<div className="grid grid-2">
+						<ChangePointChart changePoint={changePoint} />
+						<Sidebar stats={stats} changePoint={changePoint} />
 					</div>
-				) : prices.length === 0 ? (
-					<div className="card">
-						<h3>No price data available</h3>
-						<p>
-							The backend returned an empty dataset. Check that
-							 `data/raw/brent_prices.csv` exists and try a broader date range.
-						</p>
-					</div>
-				) : (
-					<div className="grid" style={{ marginTop: "24px" }}>
-						<Overview metrics={metrics} outlook={outlook} alerts={alerts} />
-						<TimeSeriesChart
-							prices={prices}
-							events={filteredEvents}
-							changePoint={changePoint}
-						/>
-						<div className="grid grid-2">
-							<ChangePointChart changePoint={changePoint} />
-							<Sidebar stats={stats} changePoint={changePoint} />
-						</div>
-						<ImpactAnalysis stats={stats} />
-						<EventTimeline events={filteredEvents} onSelect={handleEventSelect} />
-					</div>
-				)}
-			</div>
-			<Footer />
-		</div>
+					<ImpactAnalysis stats={stats} />
+					<EventTimeline events={filteredEvents} onSelect={handleEventSelect} />
+				</div>
+			)}
+		</>
 	);
 };
 

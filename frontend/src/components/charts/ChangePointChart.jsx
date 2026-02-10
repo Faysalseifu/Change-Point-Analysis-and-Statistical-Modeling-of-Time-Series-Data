@@ -18,6 +18,8 @@ const ChangePointChart = ({ changePoint }) => {
 		{ label: "Before", value: changePoint.mu_before ?? 0 },
 		{ label: "After", value: changePoint.mu_after ?? 0 },
 	];
+	const delta = Number(changePoint.delta_mu ?? 0);
+	const pct = Number(changePoint.pct_change ?? 0);
 
 	return (
 		<div className="card">
@@ -36,6 +38,16 @@ const ChangePointChart = ({ changePoint }) => {
 			<span className="tag">
 				Change point: {changePoint.mode_date || "N/A"}
 			</span>
+			<div className="impact-metrics">
+				<div>
+					<strong>Delta</strong>
+					<span>{delta.toFixed(5)}</span>
+				</div>
+				<div>
+					<strong>Percent shift</strong>
+					<span>{pct.toFixed(2)}%</span>
+				</div>
+			</div>
 		</div>
 	);
 };

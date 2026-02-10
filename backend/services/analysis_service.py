@@ -127,12 +127,16 @@ def _default_change_point(prices: pd.DataFrame) -> dict:
 	mu_after = float(returns[after_mask].mean()) if after_mask.any() else 0.0
 	hdi_low = (cp_date - pd.Timedelta(days=45)).strftime("%Y-%m-%d")
 	hdi_high = (cp_date + pd.Timedelta(days=45)).strftime("%Y-%m-%d")
+	delta_mu = mu_after - mu_before
+	pct_change = (delta_mu / abs(mu_before) * 100) if mu_before else 0.0
 	return {
 		"mode_date": cp_date.strftime("%Y-%m-%d"),
 		"hdi_low": hdi_low,
 		"hdi_high": hdi_high,
 		"mu_before": mu_before,
 		"mu_after": mu_after,
+		"delta_mu": delta_mu,
+		"pct_change": pct_change,
 	}
 
 
@@ -167,12 +171,16 @@ def get_change_points() -> dict:
 				mu_before = float(returns[before_mask].mean()) if before_mask.any() else 0.0
 				mu_after = float(returns[after_mask].mean()) if after_mask.any() else 0.0
 
+				delta_mu = mu_after - mu_before
+				pct_change = (delta_mu / abs(mu_before) * 100) if mu_before else 0.0
 				return {
 					"mode_date": cp_date.strftime("%Y-%m-%d"),
 					"hdi_low": prices.loc[hdi_low_idx, "Date"].strftime("%Y-%m-%d"),
 					"hdi_high": prices.loc[hdi_high_idx, "Date"].strftime("%Y-%m-%d"),
 					"mu_before": mu_before,
 					"mu_after": mu_after,
+					"delta_mu": delta_mu,
+					"pct_change": pct_change,
 				}
 		except Exception:
 			pass
